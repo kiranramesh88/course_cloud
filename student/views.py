@@ -94,12 +94,43 @@ class CartView(View):
             ptotal+=i.course_object.price
         return render(request,"cart.html",{"data":qs,"ptotal":ptotal})
     
-
 class RemoveFromCartView(View):
     def get(self,request,**kwargs):
         cart_id=kwargs.get('pk')
         Cart.objects.get(id=cart_id).delete()
         return redirect('cart')
+    
+class AddtoWishlistView(View):
+    def get(self, request, **kwargs):
+        cid = kwargs.get('pk')
+        course = Course.objects.get(id=cid)
+        user = request.user
+
+        cart_item, created = Wishlist.objects.get_or_create(
+            course_object=course,
+            user_object=user
+        )
+
+        if created:
+            # newly added → go to cart
+            return redirect('wish')
+        else:
+            # already exists → stay on course page
+            messages.info(request, "Already added to Wishlist")
+            return redirect('course', pk=cid) 
+
+class WishListView(View):
+    def get(self,request):
+        qs=Wishlist.objects.filter(user_object=request.user)
+        return render(request,"wish.html",{"data":qs})
+    
+
+class RemoveFromWishView(View):
+    def get(self,request,**kwargs):
+        wish_id=kwargs.get('pk')
+        Wishlist.objects.get(id=wish_id).delete()
+        return redirect('wish')
+
     
 class PlaceOrderView(View):
     def get(self,request):

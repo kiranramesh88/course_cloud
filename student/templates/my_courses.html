@@ -18,29 +18,22 @@
                     <p class="text-gray-700 dark:text-gray-300 mb-4 two-lines">{{i.description}}</p>
                     <div class="flex items-center justify-between mt-4 ">
                     {% if i not in purchased_courses %}
+                    
                     <a href="{% url 'course' i.id %}"
                         class="inline-block text-white px-4 py-2 rounded-full" style="background-color: rgb(06,79,205);">Learn
                         More</a>
-                    <div>
                     {% else %}
                         <h3 style="color: rgb(7, 172, 7);font-size: larger;font-weight: 550;">PURCHASED</h3>
-                    {% endif %}
-                    
-                    {% if i.is_free %}
-                    <h3 style="color: rgb(7, 172, 7);font-size: larger;">Free</h3>
-                    {% else %}
-                    <h3 style="color: rgb(213, 153, 3);font-size: larger;font-weight: 550;">₹{{i.price}}</h3>
-                    </div>
                         <a href="{% url 'viewlesson' i.id %}"
                         class="inline-block text-white px-4 py-2 rounded-full mt-2" style="background-color: rgb(29, 123, 0);">Start Course</a>
-                    </div>
+                    
                     {% endif %}
-                </div>
+                    </div>
             </div>
     </div>
 {% endfor %}
 {% endfor %}    
-
+</div>
 
 
 {% endblock %}

@@ -9,6 +9,10 @@ class Cart(models.Model):
     user_object=models.ForeignKey(User,on_delete=models.CASCADE,related_name="cart_course_user")
     added_at=models.DateTimeField(auto_now_add=True)
 
+class Wishlist(models.Model):
+    course_object=models.ForeignKey(Course,on_delete=models.CASCADE,related_name="wish_course")
+    user_object=models.ForeignKey(User,on_delete=models.CASCADE,related_name="wish_course_user")
+    added_at=models.DateTimeField(auto_now_add=True)
 
 class Order(models.Model):
     course_object=models.ManyToManyField(Course,related_name="enrolled_course")
