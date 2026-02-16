@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+{% block base %}
+{% load static %}
+<style>
+    #explore{
+        border: 1px solid rgb(243, 243, 245); 
+        width: 200px;
+        color: rgb(255, 255, 255);
+        margin-top: 50px;
+        font-family: 'sk-modernist',sans-serif;
+        font-size: 25px;
+    }
+    #explore:hover {
+    background: #ffffff;
+    color: #1e40af; /* deep blue */
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    }
+    #explore:focus {
+    outline: none;
+    background: #ffffff;
+    color: #1e40af;
+    box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.4);
+}
+    #explore:active {
+    transform: translateY(0);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    }
+</style>
+
+<div class="" style="min-height: 75vh;">
+    <section class="w-full min-h-50  p-2 overflow-hidden" id="hero" style="background: #064FCD; background: linear-gradient(181deg, rgba(6, 79, 205, 1) 0%, rgba(6, 55, 145, 1) 100%, rgba(255, 255, 255, 1) 100%);border-radius: 17px;">
+        <div class="w-full grid grid-cols-2 max-h-170">
+            <div class="flex flex-col justify-center" style="margin-left: 50px;margin-top: -120px;">
+                <h1 class="" style="font-weight:500;letter-spacing: -1px;font-size: 130px;font-family: 'sk-modernist',sans-serif;color: aliceblue;font-weight: bold;">Learn&Lead</h1>
+                <p class="text-justify text-white mt-2" style="font-family: 'sk-modernist',sans-serif;">
+                    Course Cloud is your destination for mastering IT skills through structured, easy-to-follow online courses. We simplify complex concepts into practical learning experiences.
+
+Our platform bridges the gap between theory and real-world application, helping learners build skills that truly matter in the industry.
+
+Join a learning ecosystem designed to help you grow, adapt, and succeed in the digital future.
+                </p>
+                <a href=""
+                        class="inline-block px-4 py-2 rounded-full text-center"  id="explore">Explore</a>
+
+            </div>
+            <div style="width: 820px;height: auto;margin-top: -40px;margin-left: 30px;">
+                <img src="{% static 'img/developer.png' %}" alt="signupimg">
+            </div>
+
+        </div>
+
+    </section>
+    <!-- Popular Courses -->
+
+    <section class=" p-5">
+        <section class="mb-16 justify-center">
+            <h2 class=" mb-8 text-center my-5 py-3" style="font-weight:500;letter-spacing: -1px;font-size: 60px;font-family: 'sk-modernist',sans-serif;color: rgb(06,79,205);font-weight: 600;margin-top: 30px;">Popular Courses</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8" style="margin-top: 40px;">
+                
+                <!-- Article Card 1 -->
+                {% for i in course %}
+
+                <div class="bg-white dark:bg-gray-800 shadow-lg rounded-lg overflow-hidden" style="width: px;font-family: 'sk-modernist',sans-serif;">
+                <img src="{{ i.picture.url }}"
+                    alt="Heroicons" class="w-full h-64 object-cover">
+                <div class="p-4 md:p-6">
+                    <h3 class="text-xl font-semibold mb-2" style="color: rgb(06,79,205);">{{i.title}}</h3>
+                    {% for j in i.category_object.all %}
+                    <span class="font-bold">{{j}} |</span>
+                    {% endfor %}
+                    <p class="text-gray-700 dark:text-gray-300 mb-4 two-lines">{{i.description}}</p>
+                    <div class="flex items-center justify-between mt-4 ">
+                    {% if i.id not in purchased_courses %}
+                    <a href="{% url 'course' i.id %}"
+                        class="inline-block text-white px-4 py-2 rounded-full" style="background-color: rgb(06,79,205);">Learn
+                        More</a>
+                    
+                    {% else %}
+                        <h3 style="color: rgb(7, 172, 7);font-size: larger;font-weight: 550;">PURCHASED</h3>
+                    {% endif %}
+                    {% if i.is_free %}
+                    <h3 style="color: rgb(7, 172, 7);font-size: larger;">Free</h3>
+                    {% else %}
+                    <h3 style="color: rgb(213, 153, 3);font-size: larger;font-weight: 550;">₹{{i.price}}</h3>
+                    </div>
+                    {% endif %}
+                </div>
+                </div>
+                {% endfor %}
+
+    </section>
+
+</div>
+
+{% endblock %}

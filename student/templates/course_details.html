@@ -1,0 +1,142 @@
+{% extends 'base.html' %}
+
+{% block base %}
+
+<style>
+     #explore{
+        border: 1px solid rgb(231, 231, 231); 
+        /* background-color: rgb(2, 165, 5); */
+        background: #ffffff;
+        color: #1e40af;
+        width: auto;
+        /* color: rgb(255, 255, 255); */
+        margin-top: 20px;
+        margin-left: 50px;
+        font-family: 'sk-modernist',sans-serif;
+        font-size: 20px;
+        border-radius: 15px;
+    }   
+    #explore:hover {
+    background: #ffffff;
+    color: #1e40af; /* deep blue */
+    /* transform: translateY(-3px); */
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
+    }
+    #explore:focus {
+    outline: none;
+    background: #ffffff;
+    color: #1e40af;
+    box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.4);
+}
+    #explore:active {
+    transform: translateY(0);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    }
+</style>
+<div class="w-full grid grid-cols-2 gap-8" style="min-height: 70vh;">
+    <div style="margin-top: 35px;padding-left: 50px;">
+        <iframe width="560" height="315" src="{{ object.thumbnail }}?autoplay=1&mute=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="width: 700px;height: 393.75px;border-radius: 20px;"></iframe>
+    </div>
+    <div style="margin-left: 50px;">
+    <div style="font-size: 40px;color: rgb(17, 17, 17);font-family: 'sk-modernist',sans-serif;margin-left: 50px;margin-top: 35px;">
+    <h2>{{object.title}}</h2>
+    </div>
+    <div style="margin-left: 50px;margin-top: 20px;">
+    {% for i in object.category_object.all %}
+    
+    <span style="font-size: 15px;color: rgb(255, 253, 253);font-family: 'sk-modernist',sans-serif;background-color: rgb(6,79,205);border-radius: 10px;padding: 10px;">{{i}}</span>
+    {% endfor %}
+    </div>
+    <div style="font-size: 17px;color: rgb(17, 17, 17);font-family: 'sk-modernist',sans-serif;margin-left: 50px;margin-top: 20px;width: 500px;">
+        <p>{{object.description}}</p>
+    </div>
+    <div style="font-size: 17px;color: rgb(6, 79, 205);font-family: 'sk-modernist',sans-serif;margin-top: 15px;width: 500px;font-weight: bold;margin-left: 50px;">
+        <h3>Instructor : {{object.owner}}</h3> 
+    </div>
+    <div style="margin-left: 50px;">
+        
+        <div style="font-size: 10px;color: rgb(17, 17, 17);font-family: 'sk-modernist',sans-serif;margin-top: 20px;width: 500px;">
+            <h3>Created At : {{object.created_at}}</h3> 
+        </div>
+        <div style="font-size: 10px;color: rgb(17, 17, 17);font-family: 'sk-modernist',sans-serif;margin-top: 10px;width: 500px;">
+            <h3>Updated At : {{object.updated_at}}</h3> 
+        </div>
+    </div>
+    <div>
+        <div>
+        {% if object.is_free %}
+        <div style="font-size: 25px;color: rgb(37, 182, 9);font-family: 'sk-modernist',sans-serif;margin-left: 50px;margin-top: 20px;width: 500px; font-weight: 800;">
+            <h3>Free</h3>
+        </div>
+        {% else %}
+        <div style="font-size: 25px;color: rgb(224, 168, 14);font-family: 'sk-modernist',sans-serif;margin-left: 50px;margin-top: 20px;width: 500px; font-weight: 800;">
+            <h3>₹ {{object.price}}</h3>
+        </div>
+        {% endif %}
+    </div>
+    {% if messages %}
+    {% for i in messages %}
+
+    <div style="color: rgb(6, 79, 205);font-weight: bold;margin-left: 50px;">
+        {{i}}
+
+    </div>
+
+    {% endfor %}
+    {% endif %}
+    <div class="w-full grid grid-cols-2" >
+        <div>
+        <a href="{% url 'addcart' object.id %}" class="inline-block px-5 py-2 rounded-full text-center"  id="explore"><i class="fa-solid fa-cart-plus"></i> Add to cart</a>
+
+        </div>
+
+        <div style="margin-left: -160px;">
+        <a href="" class="inline-block px-5 py-2 rounded-full text-center"  id="explore"><i class="fa-solid fa-heart-circle-plus"></i> Add to wishlist</a>
+
+        </div>
+        
+    </div>
+    
+    
+    </div>
+    
+    
+    <!-- <div style="font-size: 20px;color: rgb(233, 233, 233);font-family: 'sk-modernist',sans-serif;margin-left: 50px;margin-top: 20px;">
+        <a class="btn" style="width: 500px;border-radius: 20px;background-color: rgb(13, 13, 13);height: 40px;">Buy Now</a>
+    </div> -->
+    </div>
+</div>
+<div style="margin-top: -30px;">
+<div style="font-size: 30px;color: rgb(17, 17, 17);font-family: 'sk-modernist',sans-serif;margin-top: 10px;font-weight: bold;text-align: center;">
+    <h1>Modules</h1>
+</div>
+
+<ul class="max-w-2xl mt-7 mx-auto divide-y  shadow shadow-blue-600 rounded-xl">
+    {% for i in object.module.all %}
+    <li>
+        <details class="group">
+            <summary class="flex items-center gap-3 px-4 py-3 font-medium marker:content-none hover:cursor-pointer">
+                <svg class="w-5 h-5 text-gray-500 transition group-open:rotate-90" xmlns="http://www.w3.org/2000/svg"
+                    width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                        d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z">
+                    </path>
+                </svg>
+                <span>{{i}}</span>
+            </summary>
+
+            <article class="px-4 pb-4">
+                {% for j in i.lesson.all %}
+                <p>
+                    >> {{j}}
+                </p>
+                {% endfor %}
+            </article>
+        </details>
+    </li>
+    {% endfor %}
+</ul>
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,17 @@
+Custom Context Processor:
+----------------------------
+
+cp.py=> 
+
+def contextprocessor(request):
+    blockofcode
+    return {"key":value}
+
+Settings.py
+
+
+TEMPLATES={
+    "context-processor":{
+        "cp.contextProcessor"
+    }
+}

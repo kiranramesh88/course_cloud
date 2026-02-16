@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <title>Title</title>
+        <!-- Required meta tags -->
+        <meta charset="utf-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, shrink-to-fit=no"
+        />
+        <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+        <style>
+            label{
+                color: rgb(240, 242, 245);
+            }
+            button:hover{
+                background-color: aliceblue;
+                color: rgb(6, 79, 205);
+            }
+        </style>
+    </head>
+<!-- border: 2px solid rgb(6, 79, 205) -->
+    <body>
+
+        <div class="min-h-screen bg-white-100 flex items-center justify-center p-4">
+            <div class="justify-content-center">
+        <div style="font-size: 50px;color: rgb(6, 79, 205);font-family: 'sk-modernist',sans-serif;justify-content: center;background-color: rgb(255, 255, 255);align-items: center;display: flex;flex-direction: column; margin-bottom: 40px;margin-top: -10px;">
+            <h1 style="font-weight:600;letter-spacing: -1.5px;font-size: 40px;">COURSE CLOUD</h1>
+            <h3 style="font-size: 15px;color: rgb(6, 79, 205);letter-spacing: -1px;font-weight:500;">Learn. Level up. Repeat.</h3>
+      </div>
+  <div class="max-w-md w-full p-6 shadow" style="font-family: 'sk-modernist',sans-serif;border: 2px solid rgb(6, 79, 205);border-radius: 25px;width: 380px;background-color: rgb(6, 79, 205);">
+    <h2 class="text-gray-900 mb-6 text-center" style="font-size: 30px;color: rgb(240, 242, 245);">Login</h2>
+    
+    <form class="space-y-4" method="post">
+    {% csrf_token %}
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Username</label>
+        <input 
+          type="text" 
+          name="username"
+          class="w-full px-4 py-2  outline-none transition-all "
+          style="border: 1px solid rgb(239, 245, 255); border-radius: 10px;color: aliceblue;"
+          placeholder="Enter Username"
+        />
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1" >Password</label>
+        <input 
+          type="password" 
+          name="password"
+          class="w-full px-4 py-2  outline-none transition-all "
+          style="border: 1px solid rgb(239, 245, 255); border-radius: 10px;color: aliceblue;"
+          placeholder="Enter Password"
+        />
+      </div>
+
+      <div class="flex items-center justify-between">
+        <!-- <label class="flex items-center">
+           <input type="checkbox" class="rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"/> -->
+          <!-- <span class="ml-2 text-sm text-gray-600">Remember me</span> -->
+        <!-- </label> --> 
+        <a href="#" class="text-sm " style="color: rgb(171, 203, 252);">Forgot password?</a>
+      </div>
+
+      <button class="w-full  text-white font-medium py-2.5 rounded-lg transition-colors " style="background-color: rgb(7, 78, 219);color: rgb(255, 255, 255);border: 1px solid rgb(196, 213, 255);" type="submit">
+        Sign In
+      </button>
+    </form>
+
+    <div class="mt-6 text-center" style="color: rgb(175, 207, 255);">
+      Don't have an account? 
+      <a href="{% url 'std_signup' %}" class=" font-medium" style="color: rgb(242, 244, 249);">Sign up</a>
+    </div>
+  </div>
+<!-- </div>
+        <h1 class="text-4xl my-5">Student Login</h1>
+        <div class="w-screen  flex justify-center p-5">
+            <form action="" method="post" class="max-w-100">
+                {% csrf_token %}
+                <table class="table w-100">
+                    {{form.as_table}}
+                </table>
+                <button class="bg-green-300 p-2 tex-white rounded-xl ">Sign In</button>
+            </form>
+        </div>
+
+    </body>
+</html> -->

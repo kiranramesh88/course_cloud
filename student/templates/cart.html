@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block base %}
+
+
+<div style="min-height: 80vh;">
+    <h2 class=" mb-8 text-center my-5 py-3" style="letter-spacing: -1.5px;font-size: 30px;font-family: 'sk-modernist',sans-serif;color: rgb(06,79,205);font-weight: 600;margin-top: 30px;">My Cart</h2>
+    {% if data %}
+    <div class="max-w-lg mx-auto mt-16 bg-white rounded-lg overflow-hidden md:max-w-lg xl:max-w-2xl border border-gray-400" >
+    {% for i in data %}
+        <div class="flex flex-col divide-y divide-gray-200">
+        <div class="flex items-center py-4 px-6">
+            <img class="w-16 h-16 object-cover rounded border-1" src="{{ i.course_object.picture.url }}" alt="Product Image">
+            <div class="ml-3">
+                <h3 class="text-gray-900 font-semibold">{{i.course_object.title}}</h3>
+                <p class="text-gray-700 mt-1">{{i.course_object.price}}</p>
+            </div>
+            
+            <a href="{% url 'delcart' i.id %}" class="ml-auto "><button class="py-2 px-4 bg-blue-500 hover:bg-blue-600 text-white rounded-lg">
+        Remove
+      </button></a>
+      
+        </div>
+    </div>
+    {% endfor %}
+    <div class="flex items-center justify-between px-6 py-3 bg-gray-100">
+        <h3 class="text-gray-900 font-semibold">₹ {{ptotal}}</h3>
+        <a href="{% url 'order' %}"><button class="py-2 px-4 bg-blue-500 hover:bg-blue-600 text-white rounded-lg">
+      Checkout
+    </button></a>
+        
+    </div>
+</div>
+{% else %}
+<div class="w-full p-3 flex flex-col items-center">
+    <img style="max-height: 400px;padding-top: 20px;" src="https://cdni.iconscout.com/illustration/premium/thumb/empty-shopping-cart-illustration-download-in-svg-png-gif-file-formats--trolley-basket-online-pack-e-commerce-illustrations-8944843.png" alt="">
+    <h1 class="text-center" style="font-size: 20px; margin-top: 10px;font-family: sk-modernist,sans-serif;color: rgb(137, 137, 137);">No items added yet!</h1>
+</div>
+
+{% endif %}
+</div>
+
+{% endblock %}

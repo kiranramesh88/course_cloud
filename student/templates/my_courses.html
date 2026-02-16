@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block base %}
+
+<h2 class=" mb-4 text-center my-2 py-3" style="letter-spacing: -1.5px;font-size: 30px;font-family: 'sk-modernist',sans-serif;color: rgb(06,79,205);font-weight: 600;margin-top: 30px;">My Courses</h2>
+
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 justify-center ml-4" style="margin-top: 40px;">
+{% for order in course %}
+{% for i in order.course_object.all  %}
+<div class="bg-white dark:bg-gray-800 shadow-lg rounded-lg overflow-hidden" style="width: px;font-family: 'sk-modernist',sans-serif;">
+                <img src="{{ i.picture.url }}"
+                    alt="Heroicons" class="w-full h-64 object-cover">
+                <div class="p-4 md:p-6">
+                    <h3 class="text-xl font-semibold mb-2" style="color: rgb(06,79,205);">{{i.title}}</h3>
+                    {% for j in i.category_object.all %}
+                    <span class="font-bold">{{j}} |</span>
+                    {% endfor %}
+                    <p class="text-gray-700 dark:text-gray-300 mb-4 two-lines">{{i.description}}</p>
+                    <div class="flex items-center justify-between mt-4 ">
+                    {% if i not in purchased_courses %}
+                    <a href="{% url 'course' i.id %}"
+                        class="inline-block text-white px-4 py-2 rounded-full" style="background-color: rgb(06,79,205);">Learn
+                        More</a>
+                    <div>
+                    {% else %}
+                        <h3 style="color: rgb(7, 172, 7);font-size: larger;font-weight: 550;">PURCHASED</h3>
+                    {% endif %}
+                    
+                    {% if i.is_free %}
+                    <h3 style="color: rgb(7, 172, 7);font-size: larger;">Free</h3>
+                    {% else %}
+                    <h3 style="color: rgb(213, 153, 3);font-size: larger;font-weight: 550;">₹{{i.price}}</h3>
+                    </div>
+                        <a href="{% url 'viewlesson' i.id %}"
+                        class="inline-block text-white px-4 py-2 rounded-full mt-2" style="background-color: rgb(29, 123, 0);">Start Course</a>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+    </div>
+{% endfor %}
+{% endfor %}    
+
+
+
+{% endblock %}
